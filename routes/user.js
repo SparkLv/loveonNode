@@ -15,7 +15,11 @@ module.exports = {
         con(sql.login, [req.body.username], function (result) {
             if (result.length) {
                 if (req.body.password == result[0].password) {
-                    res.send(util.resData('1', result[0], '登陆成功'))
+                    con(sql.setPushId, [req.body.pushId, result[0].id], function () {
+                        res.send(util.resData('1', result[0], '登陆成功'))
+                    }, function () {
+                        res.send(util.resData('0', null, '未知错误'))
+                    })
                 } else {
                     res.send(util.resData('0', null, '用户名或密码错误'))
                 }
@@ -38,7 +42,7 @@ module.exports = {
     },
     getInfoById: function (req, res) {
         con(sql.getById, [req.params.id], function (result) {
-            res.send(result[0]);
+            res.send(util.resData(1, result[0], ''));
         }, function (err) { util.res400(err, res) })
     },
     conPart: function (req, res) {
