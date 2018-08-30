@@ -31,13 +31,16 @@ module.exports = {
             }
             if (respInfo.statusCode == 200) {
                 res.send({
-                    code:'1',
-                    data:'',
-                    message:'上传成功'
+                    code: '1',
+                    data: '',
+                    message: '上传成功'
                 });
             } else {
-                console.log(respInfo.statusCode);
-                console.log(respBody);
+                res.send({
+                    code: '0',
+                    data: '',
+                    message: '上传失败，请重试'
+                });
             }
         });
     }
