@@ -1,6 +1,7 @@
 const loveonUser = require('./user');
 const loveonUpload = require('./upload');
-const loveonTrends = require('./trends')
+const loveonTrends = require('./trends');
+const getData = require('./getData');
 
 module.exports = function (app) {
   app.route('/loveon/user/login').post(loveonUser.login);
@@ -12,4 +13,5 @@ module.exports = function (app) {
   app.route('/loveon/getUpdate').post(loveonTrends.getUpate);
   app.route('/loveon/add').post(loveonTrends.add);
   app.route('/loveon/del/:id').delete(loveonTrends.del);
+  app.route('/loveon/get/movie').get(getData.getMovie);
 };

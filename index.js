@@ -2,8 +2,8 @@ const express = require("express");
 const Router = require("./routes");
 const app = express();
 const bodyParser = require("body-parser");
-
 const loveonio = require('./routes/socket');
+const Schedule = require('./schedule');
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 Router(app);
 
 app.listen(2421);
+Schedule();
 
-loveonio.init();			
+loveonio.init();
 
